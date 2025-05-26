@@ -16,8 +16,8 @@ gem "puma", ">= 5.0"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
-gem 'bootstrap', '~> 5.1.3'
-gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
+gem "bootstrap", "~> 5.3.0"
+gem 'sassc-rails', '>= 2.1.2'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"

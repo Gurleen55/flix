@@ -1,6 +1,9 @@
 class ReviewsController < ApplicationController
 
+  before_action :require_signin 
   before_action :set_movie
+  before_action :set_review, only: [:edit, :update, :destroy]
+  before_action :require_correct_user, only: [:edit, :update, :destroy]
   def index
     @reviews = @movie.reviews
   end
@@ -12,6 +15,7 @@ class ReviewsController < ApplicationController
   def create
       
     @review = @movie.reviews.new(review_params)
+    @review.user = current_user
     
     if @review.save
       redirect_to movie_reviews_url(@movie), notice: 'Review was successfully posted.'
@@ -21,17 +25,14 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    @review = @movie.reviews.find(params[:id])
     @review.destroy
     redirect_to movie_reviews_url(@movie), notice: 'Review was successfully deleted.'
   end
 
-  def edit
-    @review = @movie.reviews.find(params[:id])
+  def edit   
   end
 
-  def update
-    @review = @movie.reviews.find(params[:id])
+  def update 
     if @review.update(review_params)
       redirect_to movie_reviews_url(@movie), notice: 'Review was successfully updated.'
     else
@@ -48,4 +49,9 @@ class ReviewsController < ApplicationController
   def set_movie
     @movie = Movie.find(params[:movie_id])
   end
+
+  def set_review
+    @review = @movie.reviews.find(params[:id])
+  end
+  
 end

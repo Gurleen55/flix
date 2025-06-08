@@ -1,8 +1,6 @@
 <%= form_with(model: [movie, review]) do |f|%>
 
     <%= render "shared/errors", object: review %>
-    <%= f.label :name %>
-    <%= f.text_field :name, autofocus: true %>
 
     <div class="legend">Stars</div>
     <%= f.collection_radio_buttons :stars,

@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  resources :genres
   
   get "up" => "rails/health#show", as: :rails_health_check
   
   root "movies#index"
+  get "movies/filter/:filter" => "movies#index", as: :filtered_movies
   
   resources :movies do
     resources :reviews

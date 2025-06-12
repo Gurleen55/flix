@@ -11,28 +11,21 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2025_06_11_001311) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "characterizations", force: :cascade do |t|
-    t.integer "movie_id", null: false
-    t.integer "genre_id", null: false
+    t.bigint "movie_id", null: false
+    t.bigint "genre_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["genre_id"], name: "index_characterizations_on_genre_id"
     t.index ["movie_id"], name: "index_characterizations_on_movie_id"
   end
 
-  create_table "events", force: :cascade do |t|
-    t.string "name"
-    t.string "location"
-    t.decimal "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "starts_at"
-    t.text "description"
-  end
-
   create_table "favorites", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "movie_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "movie_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_favorites_on_movie_id"
@@ -62,7 +55,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_001311) do
   create_table "reviews", force: :cascade do |t|
     t.integer "stars"
     t.text "comment"
-    t.integer "movie_id", null: false
+    t.bigint "movie_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
